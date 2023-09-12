@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import br.com.radon.apiJUnitMockito.domain.User;
 import br.com.radon.apiJUnitMockito.repositories.UserRepository;
 import br.com.radon.apiJUnitMockito.services.UserService;
+import br.com.radon.apiJUnitMockito.services.imp.exceptions.ObjectNotFoundException;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -20,7 +21,7 @@ public class UserServiceImpl implements UserService {
   @Override
   public User findById(Integer id) {
     Optional<User> obj = repository.findById(id);
-    return obj.orElse(null);
+    return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado"));
   }
   
 }
