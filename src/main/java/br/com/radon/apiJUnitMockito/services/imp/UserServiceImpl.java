@@ -10,6 +10,7 @@ import br.com.radon.apiJUnitMockito.domain.User;
 import br.com.radon.apiJUnitMockito.domain.dto.UserDTO;
 import br.com.radon.apiJUnitMockito.repositories.UserRepository;
 import br.com.radon.apiJUnitMockito.services.UserService;
+import br.com.radon.apiJUnitMockito.services.imp.exceptions.DataIntegratyViolationException;
 import br.com.radon.apiJUnitMockito.services.imp.exceptions.ObjectNotFoundException;
 import lombok.RequiredArgsConstructor;
 
@@ -33,7 +34,13 @@ public class UserServiceImpl implements UserService {
 
   @Override
   public User create(UserDTO obj) {
+    findByEmail(obj);
     return repository.save(mapper.map(obj, User.class));
+  }
+
+  private void findByEmail(UserDTO obj) {
+    Optional<User> userOptional = repository.findByEmail(obj.getEmail());
+    if (userOptional.isPresent()) throw new DataIntegratyViolationException("E-mail já cadastrado no sistema");
   }
   
 }
