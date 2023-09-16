@@ -19,6 +19,8 @@ Extension Pack for Java - Extensão do VS Code que ajudar em projetos Java.
 
 Coverage Gutters (semasquare) - Extensão do VS Code que permite visualizar a cobertura de teste do código.
 
+Jacoco Maven Plugin (ver [Baeldung](https://www.baeldung.com/jacoco#Configuration)) - Plugin para gerar relatório de Cobertura de Teste.
+
 ## ⚙️ Executando os testes
 
 ```
