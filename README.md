@@ -47,7 +47,7 @@ Mencione todos aqueles que ajudaram a levantar o projeto desde o seu início
 
 * **Halysson Freitas** - *Desenvolvimento da aplicação, teste e documentação*
   * [LinkedIn](https://www.linkedin.com/in/halysson-freitas/)
-  * [GitHub](https://github.com/linkParaPerfil)
+  * [GitHub](https://github.com/halyssonfreitas)
 
 ## 📄 Licença
 
