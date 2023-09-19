@@ -9,8 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import br.com.radon.apiJUnitMockito.services.imp.exceptions.DataIntegratyViolationException;
-import br.com.radon.apiJUnitMockito.services.imp.exceptions.ObjectNotFoundException;
+import br.com.radon.apiJUnitMockito.services.impl.exceptions.DataIntegratyViolationException;
+import br.com.radon.apiJUnitMockito.services.impl.exceptions.ObjectNotFoundException;
 
 @ControllerAdvice
 public class ResourceExceptionHandler {

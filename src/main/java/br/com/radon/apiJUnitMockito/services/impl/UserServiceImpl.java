@@ -1,4 +1,4 @@
-package br.com.radon.apiJUnitMockito.services.imp;
+package br.com.radon.apiJUnitMockito.services.impl;
 
 import java.util.List;
 import java.util.Optional;
@@ -10,8 +10,8 @@ import br.com.radon.apiJUnitMockito.domain.User;
 import br.com.radon.apiJUnitMockito.domain.dto.UserDTO;
 import br.com.radon.apiJUnitMockito.repositories.UserRepository;
 import br.com.radon.apiJUnitMockito.services.UserService;
-import br.com.radon.apiJUnitMockito.services.imp.exceptions.DataIntegratyViolationException;
-import br.com.radon.apiJUnitMockito.services.imp.exceptions.ObjectNotFoundException;
+import br.com.radon.apiJUnitMockito.services.impl.exceptions.DataIntegratyViolationException;
+import br.com.radon.apiJUnitMockito.services.impl.exceptions.ObjectNotFoundException;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
