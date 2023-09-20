@@ -27,6 +27,7 @@ import br.com.radon.apiJUnitMockito.services.impl.exceptions.ObjectNotFoundExcep
 @SpringBootTest
 class UserServiceImplTest {
 
+    private static final String EMAIL_JA_CADASTRADO_NO_SISTEMA = "E-mail já cadastrado no sistema";
     private static final int INDEX = 0;
     private static final String OBJETO_NAO_ENCONTRADO = "Objeto não encontrado";
     private static final Integer ID = 100;
@@ -118,7 +119,7 @@ class UserServiceImplTest {
             service.create(userDTO);
         } catch (Exception e) {
             assertEquals(DataIntegratyViolationException.class, e.getClass());
-            assertEquals("E-mail já cadastrado no sistema", e.getMessage());
+            assertEquals(EMAIL_JA_CADASTRADO_NO_SISTEMA, e.getMessage());
         } finally {
             optionalUser.get().setId(ID);
         }
@@ -137,6 +138,22 @@ class UserServiceImplTest {
         assertEquals(NAME, response.getName());
         assertEquals(EMAIL, response.getEmail());
         assertEquals(PASSWORD, response.getPassword());
+    }
+
+    @Test
+    void whenUpdateThenReturnAnDataIntegrityViolationException() {
+        when(repository.findByEmail(anyString()))
+            .thenReturn(optionalUser);
+
+        try {
+            optionalUser.get().setId(101);
+            service.update(userDTO);
+        } catch (Exception e) {
+            assertEquals(DataIntegratyViolationException.class, e.getClass());
+            assertEquals(EMAIL_JA_CADASTRADO_NO_SISTEMA, e.getMessage());
+        } finally {
+            optionalUser.get().setId(ID);
+        }
     }
 
     private void startUser() {
