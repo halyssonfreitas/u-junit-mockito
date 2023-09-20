@@ -3,6 +3,7 @@ package br.com.radon.apiJUnitMockito.services.impl;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.when;
 
@@ -88,6 +89,21 @@ class UserServiceImplTest {
         assertEquals(NAME, response.get(0).getName());
         assertEquals(EMAIL, response.get(0).getEmail());
         assertEquals(PASSWORD, response.get(0).getPassword());
+    }
+
+    @Test
+    void whenCreateThenReturnSuccess() {
+        when(repository.save(any())).thenReturn(user);
+
+        User response = service.create(userDTO);
+
+        assertNotNull(response);
+        assertEquals(response, user);
+        assertEquals(User.class, response.getClass());
+        assertEquals(ID, response.getId());
+        assertEquals(NAME, response.getName());
+        assertEquals(EMAIL, response.getEmail());
+        assertEquals(PASSWORD, response.getPassword());
     }
 
     private void startUser() {
