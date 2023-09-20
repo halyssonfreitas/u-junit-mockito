@@ -1,6 +1,7 @@
 package br.com.radon.apiJUnitMockito.services.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.when;
 
@@ -51,7 +52,9 @@ class UserServiceImplTest {
 
         User response = service.findById(ID);
 
+        assertNotNull(response);
         assertEquals(User.class, response.getClass());
+        assertEquals(ID, response.getId());
     }
 
     private void startUser() {
