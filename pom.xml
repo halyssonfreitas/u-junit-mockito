@@ -69,7 +69,7 @@
 					</execution>
 					<execution>
 						<id>report</id>
-						<phase>test</phase>
+						<phase>runtime</phase>
 						<goals>
 							<goal>report</goal>
 						</goals>
