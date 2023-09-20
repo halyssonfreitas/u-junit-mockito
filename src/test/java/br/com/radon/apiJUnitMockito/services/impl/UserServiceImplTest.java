@@ -1,10 +1,12 @@
 package br.com.radon.apiJUnitMockito.services.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.when;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -22,6 +24,7 @@ import br.com.radon.apiJUnitMockito.services.impl.exceptions.ObjectNotFoundExcep
 @SpringBootTest
 class UserServiceImplTest {
 
+    private static final int INDEX = 0;
     private static final String OBJETO_NAO_ENCONTRADO = "Objeto não encontrado";
     private static final Integer ID = 100;
     private static final String NAME = "Halysson";
@@ -69,6 +72,22 @@ class UserServiceImplTest {
             assertEquals(ObjectNotFoundException.class, e.getClass());
             assertEquals(OBJETO_NAO_ENCONTRADO, e.getMessage());
         }
+    }
+
+    @Test
+    void whenFindAllThenReturnAnListOfUsers() {
+        when(repository.findAll()).thenReturn(List.of(user));
+
+        List<User> response = service.findAll();
+
+        assertNotNull(response);
+        assertNotEquals(response.size(), 0);
+        assertEquals(User.class, response.get(INDEX).getClass());
+        
+        assertEquals(ID, response.get(0).getId());
+        assertEquals(NAME, response.get(0).getName());
+        assertEquals(EMAIL, response.get(0).getEmail());
+        assertEquals(PASSWORD, response.get(0).getPassword());
     }
 
     private void startUser() {
