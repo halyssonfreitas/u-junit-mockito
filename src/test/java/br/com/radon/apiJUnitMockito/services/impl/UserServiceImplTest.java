@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
 import java.util.List;
@@ -20,6 +21,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import br.com.radon.apiJUnitMockito.domain.User;
 import br.com.radon.apiJUnitMockito.domain.dto.UserDTO;
 import br.com.radon.apiJUnitMockito.repositories.UserRepository;
+import br.com.radon.apiJUnitMockito.services.impl.exceptions.DataIntegratyViolationException;
 import br.com.radon.apiJUnitMockito.services.impl.exceptions.ObjectNotFoundException;
 
 @SpringBootTest
@@ -96,6 +98,37 @@ class UserServiceImplTest {
         when(repository.save(any())).thenReturn(user);
 
         User response = service.create(userDTO);
+
+        assertNotNull(response);
+        assertEquals(response, user);
+        assertEquals(User.class, response.getClass());
+        assertEquals(ID, response.getId());
+        assertEquals(NAME, response.getName());
+        assertEquals(EMAIL, response.getEmail());
+        assertEquals(PASSWORD, response.getPassword());
+    }
+
+    @Test
+    void whenCreateThenReturnAnDataIntegrityViolationException() {
+        when(repository.findByEmail(anyString()))
+            .thenReturn(optionalUser);
+
+        try {
+            optionalUser.get().setId(101);
+            service.create(userDTO);
+        } catch (Exception e) {
+            assertEquals(DataIntegratyViolationException.class, e.getClass());
+            assertEquals("E-mail já cadastrado no sistema", e.getMessage());
+        } finally {
+            optionalUser.get().setId(ID);
+        }
+    }
+
+    @Test
+    void whenUpdateThenReturnSuccess() {
+        when(repository.save(any())).thenReturn(user);
+
+        User response = service.update(userDTO);
 
         assertNotNull(response);
         assertEquals(response, user);
