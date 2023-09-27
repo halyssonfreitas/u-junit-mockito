@@ -2,6 +2,7 @@ package br.com.radon.apiJUnitMockito.resources;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.when;
 
@@ -83,7 +84,15 @@ public class UserResourceTest {
   }
 
   @Test
-  void create() {
+  void whenCreateThenReturnCreated() {
+    when(service.create(any())).thenReturn(user);
+
+    ResponseEntity<UserDTO> response = userResource.create(userDTO);
+
+    assertNotNull(response);
+    assertEquals(ResponseEntity.class, response.getClass());
+    assertEquals(HttpStatus.CREATED, response.getStatusCode());
+    assertNotNull(response.getHeaders().get("Location"));
   }
 
   @Test
