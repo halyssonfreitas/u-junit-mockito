@@ -24,7 +24,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import br.com.radon.apiJUnitMockito.domain.User;
 import br.com.radon.apiJUnitMockito.domain.dto.UserDTO;
 import br.com.radon.apiJUnitMockito.repositories.UserRepository;
-import br.com.radon.apiJUnitMockito.services.impl.exceptions.DataIntegratyViolationException;
+import br.com.radon.apiJUnitMockito.services.impl.exceptions.DataIntegrityViolationException;
 import br.com.radon.apiJUnitMockito.services.impl.exceptions.ObjectNotFoundException;
 
 @SpringBootTest
@@ -122,7 +122,7 @@ class UserServiceImplTest {
             optionalUser.get().setId(101);
             service.create(userDTO);
         } catch (Exception e) {
-            assertEquals(DataIntegratyViolationException.class, e.getClass());
+            assertEquals(DataIntegrityViolationException.class, e.getClass());
             assertEquals(EMAIL_JA_CADASTRADO_NO_SISTEMA, e.getMessage());
         } finally {
             optionalUser.get().setId(ID);
@@ -153,7 +153,7 @@ class UserServiceImplTest {
             optionalUser.get().setId(101);
             service.update(userDTO);
         } catch (Exception e) {
-            assertEquals(DataIntegratyViolationException.class, e.getClass());
+            assertEquals(DataIntegrityViolationException.class, e.getClass());
             assertEquals(EMAIL_JA_CADASTRADO_NO_SISTEMA, e.getMessage());
         } finally {
             optionalUser.get().setId(ID);

@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import br.com.radon.apiJUnitMockito.services.impl.exceptions.DataIntegratyViolationException;
+import br.com.radon.apiJUnitMockito.services.impl.exceptions.DataIntegrityViolationException;
 import br.com.radon.apiJUnitMockito.services.impl.exceptions.ObjectNotFoundException;
 
 @ControllerAdvice
@@ -27,8 +27,8 @@ public class ResourceExceptionHandler {
         .body(error);
   }
 
-  @ExceptionHandler(DataIntegratyViolationException.class)
-  public ResponseEntity<StandardError> dataIntegratyViolationException(DataIntegratyViolationException ex, HttpServletRequest request) {
+  @ExceptionHandler(DataIntegrityViolationException.class)
+  public ResponseEntity<StandardError> dataIntegratyViolationException(DataIntegrityViolationException ex, HttpServletRequest request) {
     StandardError error = new StandardError(
         LocalDateTime.now(),
         HttpStatus.NOT_FOUND.value(),
