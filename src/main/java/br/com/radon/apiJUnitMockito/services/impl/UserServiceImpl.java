@@ -1,4 +1,4 @@
-package br.com.radon.apiJUnitMockito.services.imp;
+package br.com.radon.apiJUnitMockito.services.impl;
 
 import java.util.List;
 import java.util.Optional;
@@ -10,8 +10,8 @@ import br.com.radon.apiJUnitMockito.domain.User;
 import br.com.radon.apiJUnitMockito.domain.dto.UserDTO;
 import br.com.radon.apiJUnitMockito.repositories.UserRepository;
 import br.com.radon.apiJUnitMockito.services.UserService;
-import br.com.radon.apiJUnitMockito.services.imp.exceptions.DataIntegratyViolationException;
-import br.com.radon.apiJUnitMockito.services.imp.exceptions.ObjectNotFoundException;
+import br.com.radon.apiJUnitMockito.services.impl.exceptions.DataIntegrityViolationException;
+import br.com.radon.apiJUnitMockito.services.impl.exceptions.ObjectNotFoundException;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -40,7 +40,7 @@ public class UserServiceImpl implements UserService {
 
   private void findByEmail(UserDTO obj) {
     Optional<User> userOptional = repository.findByEmail(obj.getEmail());
-    if (userOptional.isPresent() && !userOptional.get().getId().equals(obj.getId())) throw new DataIntegratyViolationException("E-mail já cadastrado no sistema");
+    if (userOptional.isPresent() && !userOptional.get().getId().equals(obj.getId())) throw new DataIntegrityViolationException("E-mail já cadastrado no sistema");
   }
 
   @Override
